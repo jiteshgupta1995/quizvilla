@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome to Quizvilla</title>
+<style>
+a:hover{
+	cursor:pointer;
+	text-decoration:none;
+	color:#03C;
+	border-bottom:2px;
+	border-left:2px;
+	border-right:2px;
+	border-top:2px;
+	background-color:#FFF;
+}
+a{
+	background-color:#FFF;
+	color:#000;
+	padding-left:10px;
+	text-decoration:none;
+}
+.red{
+	cursor:pointer;
+	text-decoration:none;
+	color:#C33;
+	padding-right:15px;
+	padding-left:15px;
+
+}
+.blue{
+	cursor:pointer;
+	text-decoration:none;
+	color:#03C;
+	padding-right:15px;
+	padding-left:15px;
+
+}
+.green{
+	color:#0C0;
+	text-decoration:none;
+	padding-right:15px;
+	padding-left:15px;
+	cursor:pointer;
+	text-decoration:none;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="cssfile.css"/>
+</head>
+<body id="image">
+<div id="top">
+<span>Welcome to the Quizvilla</span>
+</div>
+    <!-- Login ---------------->	
+    <form action="login.php" method="post">
+    <table cellpadding="0" cellspacing="5ptx" style="padding:260px" align="center">
+        <tr>
+            <td><input type="text" placeholder="username" name="us"/></td>
+            <td><input type="password" placeholder="password" name="pass"/></td>
+            <td>
+            <select name="type">
+            <option value="Student">Student</option>
+            <option value="Faculty">Faculty</option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" name="submit" value="log in"/></td>
+        </tr>
+        </table>
+        </form>
+    <table id="align4">
+        <tr>
+          <td><center><a href="signup.html" class="red">New user? Sign up</a></center></td>
+        </tr>
+    </table>
+<div id="bottom-menu">
+       <a class="red" href="about.html">About Us</a>
+       <a class="green" href="help.html">Help</a>
+       <a class="blue" href="privacy.html">Privacy</a>
+       <a class="green" href="#">Terms</a>
+       <a class="blue" href="#">© 2015 Quizvilla</a>
+</div>
+
+</body>
+</html>

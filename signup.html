@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Sign Up</title>
+<style>
+    #top-menu {
+        width: 100%;
+        height: 33px;
+        background-color:#000;
+		margin-top:0px;
+		margin-left:0px;
+		padding: 0px;
+		font-size:24px;
+		color:#FFF;
+    }
+	#bottom-menu {
+        width: 100%;
+        height: 33px;
+        background-color:#000;
+		margin-top:150px;
+		margin-bottom:20px;
+		margin-left:0px;
+		padding: 0px;
+		color:#FFF;
+    }
+
+</style>
+<script type="text/javascript" src="javascriptfile.js"></script>
+<script type="text/javascript" src="options.js"></script>
+<script type="text/javascript">
+function remove1()
+{
+//document.write("abcd");
+}
+function moreoption(){
+var d=document.getElementById("opt");
+var str=d.options[d.selectedIndex].text;
+var ht="<table id='std'><tr><td>Course:</td><td><select id='dnameSelect1' size='1' name='branch' onchange='makeSubjectmenu1(this.value)'><option></option><option value='cse'>CSE </option><option value='ece' >ECE</option><option value='ee' >EE</option><option value='me' >ME</option><option value='ce' >CE</option><option value='bba_gen' >BBA(GEN)</option><option value='bba_finance' >BBA_finance</option><option value='pgdm' >PGDM</option><option value='ash' >Applied_Sciences_Hum_Manag</option></select> *</td></tr><tr><td><font size='4'>Select semester:</font></td><td><select id='subjectSelect1' name='sem' size='1'><option></option></select> *</td></tr></table>";
+
+var hs="<table id='fac'><tr><td>Enter faculty password:</td><td><input type='password' name='check1' id='check1'/> *</td></tr><tr><td>Select Department:</td><td><select id='dnameSelect' size='1' name='branch' onchange='makeSubjectmenu(this.value)'><option></option><option value='cse' >CSE </option><option value='ece' >ECE</option><option value='ee' >EE</option><option value='me' >ME</option><option value='ce' >CE</option><option value='bba_gen' >BBA(GEN)</option><option value='bba_finance' >BBA_finance</option><option value='pgdm' >PGDM</option><option value='ash' >Applied_Sciences_Hum_Manag</option></select> *</td></tr><!--<tr><td><font size='4'>Select Subject:</font></td><td><select id='subjectSelect' name='subject' size='1'><option></option></select> *</td></tr>--></table>";
+
+if(str=='Student'){
+my_div.innerHTML=my_div.innerHTML+ht;
+var olddiv=document.getElementById('fac');
+olddiv.remove();
+}
+else{
+my_div.innerHTML=my_div.innerHTML+hs;
+var olddiv1=document.getElementById('std');
+olddiv1.remove();
+}
+}
+</script>
+</head>
+
+
+<body background="images/Elegant_Background-5.jpg">
+<nav id="top-menu">
+<ul>
+<center>Enter the details to sign up<br/></center>
+</ul>
+</nav>
+
+		
+<div style="padding-top:120px;" align="center">
+<form action="signupphp.php" method="post" name="f1" id="f1" onsubmit="return check()" >
+* All fields are compulsary
+	<table cellpadding="2">
+    	<tr>
+        	<td>Type:</td>
+            <td><select id="opt" name="type" onchange="moreoption()">
+            <option value=""></option>
+            <option value="Faculty">Faculty</option>
+            <option value="Student">Student</option>
+            </select> *</td>
+        </tr>
+		<tr>
+			<td>First Name:</td>
+        	<td><input type="text" name="first" id="first" placeholder="first name" maxlength="20"/> *</td>
+		</tr>
+        <tr>
+        	<td>Last Name:</td>
+            <td><input type="text" name="last" id="last" placeholder="last name" maxlength="20"/> *</td>
+        </tr>
+        <tr>
+        	<td>Email:</td>
+            <td><input type="email" name="email" id="email" placeholder="abc@abc.com" maxlength="20"/> *</td>
+        </tr>
+        <tr>
+        	<td>Address:</td>
+            <td><input type="text" name="address" id="address" placeholder="address" maxlength="30"/> *</td>
+        </tr>
+        <tr>
+        	<td>Phone no:</td>
+            <td><input type="text" name="phone" id="phone" placeholder="+919999999999" maxlength="20"/> *</td>
+        </tr>
+        <tr>
+        	<td>Username:</td>
+            <td><input type="text" name="user" id="user" placeholder="username" maxlength="20"/> *</td>
+        </tr>
+        <tr>
+        	<td>Password:</td>
+            <td><input type="password" name="pass" id="pass" placeholder="password" maxlength="20"/> *</td>
+        </tr>
+        <tr>
+        	<td>Confirm Password:</td>
+            <td><input type="password" name="cpass" id="cpass" placeholder="confirm password" maxlength="20"/> *</td>
+        </tr>
+        <div id="my_div"></div>
+        <tr>
+    		<td></td>
+            <td><input type="submit" value="Register"/></td>
+    	</tr>
+</table>
+</form>
+<a href="landing_page.html" style="text-decoration:none; color:#00C;">Already a member. Sign in.</a>
+</div>
+<ul id="bottom-menu">
+<marquee scrollamount="20" behavior="alternate"><font face="Times New Roman, Times, serif" color="#FFFFFF" size="+1" >This Project is made by Jitesh Gupta
+</font>
+</marquee>
+</ul>
+</body>
+</html>
