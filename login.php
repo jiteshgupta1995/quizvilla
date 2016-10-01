@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
 include("connectphp.php");
 session_start();
 $us=htmlentities($_POST["us"]);
@@ -12,7 +11,7 @@ $sql="select * from user where username='{$us}' and pass='{$pass_hash}' and type
 $result=mysqli_query($con,$sql);
 if(mysqli_num_rows($result)<1)
 	{
-		echo "<center>Login Id does not exit or password is wrong. Try <a href='index.html'> Login</a> again</center>";
+		echo "<center>Login Id does not exit or password is wrong. Try <a href='landing_page.html'> Login</a> again</center>";
 		exit;
 	}
 	else

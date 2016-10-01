@@ -94,17 +94,19 @@
 
         var DRPTemplate = '<div class="daterangepicker dropdown-menu">' +
                 '<div class="calendar left"></div>' +
+                '<div class="calendar right"></div>' +
                 '<div class="ranges">' +
                   '<div class="range_inputs">' +
-/*                    '<div class="daterangepicker_start_input" style="float: left">' +
-                     /* '<label for="daterangepicker_start">' + this.locale.fromLabel + '</label>' +
+                    '<div class="daterangepicker_start_input" style="float: left">' +
+                      '<label for="daterangepicker_start">' + this.locale.fromLabel + '</label>' +
                       '<input class="input-mini" type="text" name="daterangepicker_start" value="" disabled="disabled" />' +
-                    '</div>' +/*
+                    '</div>' +
                     '<div class="daterangepicker_end_input" style="float: left; padding-left: 11px">' +
                       '<label for="daterangepicker_end">' + this.locale.toLabel + '</label>' +
                       '<input class="input-mini" type="text" name="daterangepicker_end" value="" disabled="disabled" />' +
-                    '</div>' +*/
+                    '</div>' +
                     '<button class="' + this.applyClass + ' applyBtn" disabled="disabled">' + this.locale.applyLabel + '</button>&nbsp;' +
+                    '<button class="' + this.cancelClass + ' cancelBtn">' + this.locale.cancelLabel + '</button>' +
                   '</div>' +
                 '</div>' +
               '</div>';
@@ -124,9 +126,9 @@
             if (typeof options.startDate == 'string')
                 this.startDate = moment(options.startDate, this.format);
 
-/*            if (typeof options.endDate == 'string')
+            if (typeof options.endDate == 'string')
                 this.endDate = moment(options.endDate, this.format);
-*/
+
             if (typeof options.minDate == 'string')
                 this.minDate = moment(options.minDate, this.format);
 
@@ -136,16 +138,16 @@
             if (typeof options.startDate == 'object')
                 this.startDate = moment(options.startDate);
 
- /*           if (typeof options.endDate == 'object')
+            if (typeof options.endDate == 'object')
                 this.endDate = moment(options.endDate);
-*/
+
             if (typeof options.minDate == 'object')
                 this.minDate = moment(options.minDate);
 
             if (typeof options.maxDate == 'object')
                 this.maxDate = moment(options.maxDate);
 
-            if (typeof options.ranges == 'object') {/*
+            if (typeof options.ranges == 'object') {
                 for (var range in options.ranges) {
 
                     var start = moment(options.ranges[range][0]);
@@ -172,12 +174,12 @@
 
                 var list = '<ul>';
                 for (var range in this.ranges) {
-                    list += '<li>';
+                    list += '<li>' + range + '</li>';
                 }
-                list += '<li>';
+                list += '<li>' + this.locale.customRangeLabel + '</li>';
                 list += '</ul>';
                 this.container.find('.ranges').prepend(list);
-            */}
+            }
 
             if (typeof options.dateLimit == 'object')
                 this.dateLimit = options.dateLimit;
@@ -452,7 +454,7 @@
 
         updateInputText: function() {
             if (this.element.is('input'))
-                this.element.val(this.startDate.format(this.format)/* + this.separator + this.endDate.format(this.format)*/);
+                this.element.val(this.startDate.format(this.format) + this.separator + this.endDate.format(this.format));
         },
 
         clickRange: function (e) {
@@ -849,7 +851,7 @@
 
                 html += '</select> ';
 
- /*               if (this.timePicker12Hour) {
+                if (this.timePicker12Hour) {
                     html += '<select class="ampmselect">';
                     if (selected.hour() >= 12) {
                         html += '<option value="AM">AM</option><option value="PM" selected="selected">PM</option>';
@@ -858,7 +860,7 @@
                     }
                     html += '</select>';
                 }
-*/
+
                 html += '</div>';
 
             }

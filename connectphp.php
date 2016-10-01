@@ -1,5 +1,6 @@
 <?php
-$con=mysqli_connect("mysql9.000webhost.com","a8352941_jits","jitesh123","a8352941_quiz");
+$database="quiz";
+$con=mysqli_connect("localhost","root","",$database);
 if(!$con){
 die('Could not connect'.mysql_error());
 }

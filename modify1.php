@@ -1,25 +1,8 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
 include("connectphp.php");
 session_start();
 $user=$_SESSION["login"];
 $type=$_SESSION["type"];
-
-$sql2="select sub1,sub2,sub3 from faculty where username='{$user}';";
-$result2=mysqli_query($con,$sql2);
-$row=mysqli_fetch_assoc($result2);
-$sub1=$row["sub1"];
-$sub2=$row["sub2"];
-$sub3=$row["sub3"];
-
-if($_SESSION["c"]!=0){
-$subject=$_POST["subject"];
-
-if(!empty($subject)){  
-$sql="select * from question where subject='{$subject}';";
-$result=mysqli_query($con,$sql);
-}
-}
 if(isset($_SESSION["login"])){
 ?>
 
@@ -62,7 +45,7 @@ if(isset($_SESSION["login"])){
     <div class="wrapper">
       
       <header class="main-header">
-        <a href="facultyphp.php" class="logo"><b>Welcome!</b> Faculty</a>
+        <a href="testmysql.php" class="logo"><b>Welcome!</b> Faculty</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
@@ -93,7 +76,7 @@ if(isset($_SESSION["login"])){
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="fac_profile.php" class="btn btn-default btn-flat">Profile</a>
+                      <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
                       <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -152,77 +135,30 @@ if(isset($_SESSION["login"])){
         <!-- Main content -->
         <!-- Main content -->
         <section class="content">
-	      <div class="row">
-            <div class="col-xs-12"><!-- /.box -->
+        <form method="post" action="modify1.php">
+          <div class="row">
+            <div class="col-md-6"><!-- /.box -->
               <!-- iCheck -->
               <div class="box box-info">
-             <table id="example1" class="table table-bordered table-striped"> 
+              <table cellspacing="3px">
               <tr>
-              <form action="modify1.php" method="post"> 
-              <td>
-              <div class="form-group">
-              <label>Select Subject:</label>
-              <div class="input-group">
-              <select name="subject" class="form-control">
-              <option></option>
-              <option><?php echo $sub1; ?></option>
-              <option><?php echo $sub2; ?></option>
-              <option><?php echo $sub3; ?></option>
-              </select>
-              </div>
-              </div>
-              </td>
-              <td>
-              <div class="form-group">
-              <label></label>
-              <div class="input-group">
-              <input type="submit" class="btn bg-green" value="Find All"/>
-              </div>
-              </div>
-              </td>    
-	         </form>              
+              <td>Subject:</td><td><input type="text" name="subject" size="10" placeholder="abcd"/>&nbsp;</td>
+              <td>Branch:</td><td><input type="text" name="branch" size="6" placeholder="cse"/>&nbsp;</td>
+              <td>Semester:</td><td><input type="text" name="sem" size="1" placeholder="2"/>&nbsp;</td>
               </tr>
-              <tr>
-              <td>Question id</td>
-              <td>Subject</td>
-              <td>Question</td>
-              <td>Option 1</td>
-              <td>Option 2</td>
-              <td>Option 3</td>
-              <td>Option 4</td>
-              <td>True Answer</td>
-              </tr>
-              <tr>
-			<?php 
-			if($_SESSION["c"]!=0){
-			while($row=mysqli_fetch_assoc($result)){ ?>
-				<tr>
-                <td><?php echo $row["id"]; ?></td>
-                <td><?php echo $row["subject"]; ?></td>
-                <td><?php echo $row["ques"]; ?></td>
-                <td><?php echo $row["ans1"]; ?></td>
-                <td><?php echo $row["ans2"]; ?></td>
-                <td><?php echo $row["ans3"]; ?></td>
-                <td><?php echo $row["ans4"]; ?></td>                
-                <td><?php echo $row["true_ans"]; ?></td>
-                </tr>
-				<?php }} ?>
               </table>
                 </div>
                </div>
               </div> 
-     <form method="post" action="modify3.php">
-       <input type="text" placeholder="Enter Question id" name="id"/>
-       <input type="submit" class="btn bg-green" value="Proceed"/>
-       <?php $_SESSION["d"]=0; ?>
-       </form>
+       <input type="submit" class="btn bg-green" value="Submit"/>    
+    </form>      
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2015-2016 <a href="https://plus.google.com/+JiteshGupta1995/about">+Jitesh</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2015-2016 <a href="https://plus.google.com/+JiteshGupta1995/about">Jitesh</a>.</strong> All rights reserved.
       </footer>
     </div><!-- ./wrapper -->
 
@@ -274,11 +210,29 @@ if(isset($_SESSION["login"])){
 <?php
 }
 else{
-echo "You are not login. Please click <a href='index.html'>Log in</a> to login";
+echo "You are not login. Please click <a href='landing_page.html'>Log in</a> to login";
 exit;
 }
+$branch=$_POST["branch"];
+$subject=$_POST["subject"];
+$sem=$_POST["sem"];
 
-$_SESSION["c"]=1;
+if(!empty($branch)&&!empty($sem)&&!empty($subject)){  
+$sql="select * from question where branch='{$branch}' and subject='{$subject}' and sem='{$sem}';";
+$result=mysqli_query($con,$sql);
+while($row=mysqli_fetch_row($result)){
+echo "question ".$row["ques"];
+echo "option 1 ".$row["ans1"];
+echo "option 2 ".$row["ans2"];
+echo "option 3 ".$row["ans3"];
+echo "option 4 ".$row["ans4"];
+echo "True answer ".$row["true_ans"];
+echo "<br/>";
+}
+}
+else{
+echo "Please Fill all details";
+}
 
 /*session_destroy();
 mysqli_close($con);*/

@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
-
 include("connectphp.php");
 
 $first=htmlentities($_POST["first"]);

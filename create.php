@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
 include("connectphp.php");
 session_start();
 $user=$_SESSION["login"];
@@ -19,21 +18,15 @@ if(isset($_SESSION["login"])){
 ?>
 
 <!DOCTYPE html>
-<html><head>
+<html>
+  <head>
     <meta charset="UTF-8">
-    <title><?php echo $user;?> | Create quiz</title>
+    <title><?php $user; ?> | quiz</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-
     <!-- Bootstrap 3.3.2 -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
-  
-    <link href="HTML/css/font-awesome.min.css" type="text/css" />
-    <!-- Date Picker--
-  <link href="plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css">  
-      <!-- Date Picker-->
-  <link href="plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css">  
-    <link href="plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css">  
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
     <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- daterange picker --
@@ -51,7 +44,7 @@ if(isset($_SESSION["login"])){
     <link href="dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="plugins/iCheck/all.css" rel="stylesheet" type="text/css" />
-<script type="application/javascript" src="javascriptfile.js"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -63,7 +56,7 @@ if(isset($_SESSION["login"])){
     <div class="wrapper">
       
       <header class="main-header">
-        <a href="facultyphp.php" class="logo"><b>Welcome!</b> Faculty</a>
+        <a href="facultyphp.php" class="logo">Welcome</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
@@ -153,56 +146,29 @@ if(isset($_SESSION["login"])){
         <!-- Main content -->
         <!-- Main content -->
         <section class="content">
-        <form method="post" action="create.php" name="f4" onSubmit="return create()">
+        <form method="post" action="create.php">
           <div class="row">
-            <div class="col-xs-8"><!-- /.box -->
+            <div class="col-md-6"><!-- /.box -->
               <!-- iCheck -->
               <div class="box box-info">
-			<table id="example1" class="table table-bordered table-striped"> 
+              <table cellspacing="3">
               <tr>
+              <td>Select Subject:</td>
               <td>
-              <div class="form-group">
-              <label>Select Subject:</label>
-              <div class="input-group">
-              <select name="subject" class="form-control">
+              <select name="subject">
               <option></option>
               <option><?php echo $sub1; ?></option>
               <option><?php echo $sub2; ?></option>
               <option><?php echo $sub3; ?></option>
               </select>
-              </div>
-              </div>
               </td>
-              <td>
-              <div class="form-group">
-                    <label>From Date:</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="text" class="form-control pull-right" id="reservationtime" name="from_date">
-                    </div><!-- /.input group -->
-                  </div>
-              </td>              
-              <td>
-              <div class="form-group">
-                    <label>To Date:</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="text" class="form-control pull-right" id="reservationtime1" name="to_date">
-                    </div><!-- /.input group -->
-                  </div>
-              </td>              
-              
               </tr>
               </table>
                 </div>
                </div>
               </div> 
           <div class="row">
-            <div class="col-xs-8"><!-- /.box -->
+            <div class="col-md-6"><!-- /.box -->
               <!-- iCheck -->
               <div class="box box-danger">
                  <h3 class="box-title">
@@ -256,7 +222,7 @@ if(isset($_SESSION["login"])){
               </div><!-- /.box -->
        		</div><!-- /.box-body -->
            </div><!-- btn-warning/.box -->
-	<input type="submit" class="btn bg-green" value="Publish"/>    
+	<input type="submit" class="btn bg-green" value="Submit"/>    
     </form>      
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
@@ -264,7 +230,7 @@ if(isset($_SESSION["login"])){
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2015-2016 <a href="https://plus.google.com/+JiteshGupta1995/about">+Jitesh</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2015-2016 <a href="https://plus.google.com/+JiteshGupta1995/about">Jitesh</a>.</strong> All rights reserved.
       </footer>
     </div><!-- ./wrapper -->
 
@@ -279,10 +245,6 @@ if(isset($_SESSION["login"])){
     <script src="plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
     <!-- date-range-picker --
     <script src="plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-    <!-- date-picker -->
-    <script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
-    <script src="plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-
     <!-- bootstrap color picker -->
     <script src="plugins/colorpicker/bootstrap-colorpicker.min.js" type="text/javascript"></script>
     <!-- bootstrap time picker -->
@@ -313,69 +275,6 @@ if(isset($_SESSION["login"])){
 
       });
     </script>
-<!-- Page script -->
-    <script type="text/javascript">
-      $(function () {
-        //Datemask dd/mm/yyyy
-        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-        //Datemask2 mm/dd/yyyy
-//        $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
-        //Money Euro
-        $("[data-mask]").inputmask();
-
-        //Date range picker
-        $('#reservation').datepicker();
-		$('#reservation1').datepicker();
-        //Date range picker with time picker
-        $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 15, format: 'YYYY/MM/DD H:mm:ss'});
-        $('#reservationtime1').daterangepicker({timePicker: true, timePickerIncrement: 15, format: 'YYYY/MM/DD H:mm:ss'});
-       
-	    //Date range as a button
-/*        $('#daterange-btn').daterangepicker(
-                {
-                  ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
-                    'Last 7 Days': [moment().subtract('days', 6), moment()],
-                    'Last 30 Days': [moment().subtract('days', 29), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
-                  },
-                  startDate: moment().subtract('days', 29),
-                  endDate: moment()
-                },
-        function (start, end) {
-          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        }
-        );
-
-  */    //iCheck for checkbox and radio inputs
-        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-          checkboxClass: 'icheckbox_minimal-blue',
-          radioClass: 'iradio_minimal-blue'
-        });
-        //Red color scheme for iCheck
-        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-          checkboxClass: 'icheckbox_minimal-red',
-          radioClass: 'iradio_minimal-red'
-        });
-        //Flat red color scheme for iCheck
-        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-          checkboxClass: 'icheckbox_flat-green',
-          radioClass: 'iradio_flat-green'
-        });
-
-        //Colorpicker
-        $(".my-colorpicker1").colorpicker();
-        //color picker with addon
-        $(".my-colorpicker2").colorpicker();
-
-        //Timepicker
-        $(".timepicker").timepicker({
-          showInputs: false
-        });
-      });
-    </script>
 
   </body>
 </html>
@@ -383,7 +282,7 @@ if(isset($_SESSION["login"])){
 <?php
 }
 else{
-echo "You are not login. Please click <a href='index.html'>Log in</a> to login";
+echo "You are not login. Please click <a href='landing_page.html'>Log in</a> to login";
 exit;
 }
 $ques1=$_POST["ques"];
@@ -391,18 +290,18 @@ $ans1=$_POST["ans1"];
 $ans2=$_POST["ans2"];
 $ans3=$_POST["ans3"];
 $ans4=$_POST["ans4"];
+$sem=$_POST["sem"];
+$branch=$_POST["branch"];
 $subject=$_POST["subject"];
 $true_ans=$_POST["true_ans"];
-$from_date=$_POST["from_date"];
-$to_date=$_POST["to_date"];
-
-if(!empty($from_date)&&!empty($to_date)&&!empty($subject)){
-mysqli_query($con,"insert into onspot(subject,from_date,to_date)values('{$subject}','{$from_date}','{$to_date}');");
-}
-
-if(!empty($subject)&&!empty($ques1)&&!empty($ans1)&&!empty($ans2)&&!empty($ans3)&&!empty($ans4)&&!empty($true_ans)){  
-$sql="insert into question(id,subject,ques,ans1,ans2,ans3,ans4,true_ans) values(NULL,'{$subject}','{$ques1}','{$ans1}','{$ans2}','{$ans3}','{$ans4}','{$true_ans}') ;";
+if(!empty($branch)&&!empty($sem)&&!empty($subject)&&!empty($ques1)&&!empty($ans1)&&!empty($ans2)&&!empty($ans3)&&!empty($ans4)&&!empty($true_ans)){  
+$sql="insert into question(branch,sem,subject,ques,ans1,ans2,ans3,ans4,true_ans) values('{$branch}','{$sem}','{$subject}','{$ques1}','{$ans1}','{$ans2}','{$ans3}','{$ans4}','{$true_ans}') ;";
 $result=mysqli_query($con,$sql);
+exit;
+}
+else{
+echo "Please Fill all details";
+exit;
 }
 /*session_destroy();
 mysqli_close($con);*/

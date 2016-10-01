@@ -1,12 +1,8 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
 include("connectphp.php");
 session_start();
 $us=$_SESSION["login"];
 $type=$_SESSION["type"];
-$_SESSION["q"]=0;
-$_SESSION["tru"]=0;
-$_SESSION["total"]=0;
 /*$sub="select sub1,sub2,sub3,sub4,sub5,sub6 from student_info,user,student_detail where user.username=student_detail.username and student_detail.branch=student_info.branch and student_detail.sem=student_info.sem and user.username='{$us}';";
 	$sub_result=mysqli_query($con,$sub);
 while($row=$sub_result->fetch_assoc()){
@@ -25,7 +21,7 @@ if(isset($_SESSION["login"])){
 <html>
   <head>
     <meta charset="UTF-8">
-    <title><?php echo $us;?> | Way to Quiz</title>
+    <title>User | Dashboard</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
@@ -156,7 +152,7 @@ if(isset($_SESSION["login"])){
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview">
+            <li class="active treeview">
               <a href="studentphp.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span><!-- <i class="fa fa-angle-left pull-right"></i>-->
               </a>
@@ -164,7 +160,7 @@ if(isset($_SESSION["login"])){
                 <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
               </ul>
 -->      </li>
-			<li class="active treeview">
+			<li class="treeview">
               <a href="#">
                 <i class="fa fa-folder"></i> <span>Start Quiz  
 				 </span><small class="label pull-right bg-green">new</small>
@@ -173,12 +169,7 @@ if(isset($_SESSION["login"])){
             </li>
 			<li>
               <a href="profile.php">
-                <i class="fa fa-th"></i> <span>Edit Profile</span>
-              </a>
-            </li>
-            <li>
-              <a href="view.php">
-                <i class="fa fa-th"></i> <span>View Result</span>
+                <i class="fa fa-th"></i> <span>Edit Profile</span></small>
               </a>
             </li>
             <li>
@@ -268,7 +259,7 @@ if(isset($_SESSION["login"])){
               <div class="small-box bg-purple">
                 <div class="inner">
                   <h4><a href='main.php?subj=5' style="color:#FFF;"><i class="fa fa-circle-o"></i>
-				  Sports
+				  Sportts
                  </a></h4>                  
                 </div>
             </div>
@@ -340,7 +331,7 @@ if(isset($_SESSION["login"])){
 <?php
 }
 else{
-echo "You are not login. Please click <a href='index.html'>Log in</a> to login";
+echo "You are not login. Please click <a href='landing_page.html'>Log in</a> to login";
 exit;
 }
 /*session_destroy();

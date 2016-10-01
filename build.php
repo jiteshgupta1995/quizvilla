@@ -1,10 +1,8 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
 include("connectphp.php");
 session_start();
 $us=$_SESSION["login"];
 $type=$_SESSION["type"];
-$_SESSION["c"]=1;
 if(isset($_SESSION["login"])){
 ?>
 
@@ -110,7 +108,7 @@ if(isset($_SESSION["login"])){
           </div>
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview">
+            <li class="active treeview">
               <a href="facultyphp.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span><!-- <i class="fa fa-angle-left pull-right"></i>-->
               </a>
@@ -118,7 +116,7 @@ if(isset($_SESSION["login"])){
                 <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
               </ul>
 -->      </li>
-			<li class="active treeview">
+			<li class="treeview">
               <a href="#">
                 <i class="fa fa-folder"></i>
                 <span>Start Building Quiz</span>
@@ -181,7 +179,7 @@ if(isset($_SESSION["login"])){
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h4><a href="modify2.php" style="color:#FFF;">View Student Performance
+                  <h4><a href="#" style="color:#FFF;">Delete Test
                   </a></h4>
                 </div>
 		     </div>
@@ -240,7 +238,7 @@ if(isset($_SESSION["login"])){
 <?php
 }
 else{
-echo "You are not login. Please click <a href='index.html'>Log in</a> to login";
+echo "You are not login. Please click <a href='landing_page.html'>Log in</a> to login";
 exit;
 }
 /*session_destroy();

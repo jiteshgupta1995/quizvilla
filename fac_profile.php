@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <?php
-//error_reporting(E_ERROR | E_PARSE);
 include("connectphp.php");
 session_start();
 $user=$_SESSION["login"];
@@ -9,7 +8,7 @@ $type=$_SESSION["type"];
 /*$user=mysqli_real_escape_string($con,$user);*/
 $sql="select * from user where username='{$user}';";
 $result=mysqli_query($con,$sql);
-while($row=mysqli_fetch_assoc($result)){
+while($row=$result->fetch_assoc()){
 $first=$row["first"];
 $last=$row["last"];
 $pass=$row["pass"];
@@ -17,18 +16,18 @@ $address=$row["address"];
 $phone=$row["phone"];
 $email=$row["email"];
 }
-$subject="select sub1,sub2,sub3 from faculty where username='{$user}';";
-$result2=mysqli_query($con,$subject);
-while($row=mysqli_fetch_assoc($result2)){
-$sub11=$row["sub1"];
-$sub12=$row["sub2"];
-$sub13=$row["sub3"];
+$subject="select sub1,sub2,sub3 from faculty where first='{$first}';";
+$sub_result=mysqli_query($con,$subject);
+while($row=$sub_result->fetch_assoc()){
+$sub1=$row["sub1"];
+$sub2=$row["sub2"];
+$sub3=$row["sub3"];
 }
 if(isset($_SESSION["login"])){
 ?>
   <head>
     <meta charset="UTF-8">
-    <title><?php echo $user; ?> | Profile</title>
+    <title><?php echo $user; ?> | Dashboard</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -41,7 +40,7 @@ if(isset($_SESSION["login"])){
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
     <link href="dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-<script type="application/javascript" src="javascriptfile.js"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -54,7 +53,7 @@ if(isset($_SESSION["login"])){
       
       <header class="main-header">
         <!-- Logo -->
-        <a href="facultyphp.php" class="logo"><b>Welcome!</b> Faculty</a>
+        <a href="#" class="logo"><b>Welcome!</b> Faculty</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
@@ -121,8 +120,8 @@ if(isset($_SESSION["login"])){
          <!-- sidebar menu: : style can be found in sidebar.less -->
          <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview">
-              <a href="facultyphp.php">
+            <li class="active treeview">
+              <a href="testmysql.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span><!-- <i class="fa fa-angle-left pull-right"></i>-->
               </a>
 <!--              <ul class="treeview-menu">
@@ -136,7 +135,7 @@ if(isset($_SESSION["login"])){
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
             </li>
-			<li class="active">
+			<li>
               <a href="#">
                 <i class="fa fa-th"></i> <span>Edit Profile</span></small>
               </a>
@@ -175,7 +174,7 @@ if(isset($_SESSION["login"])){
                   <h3 class="box-title">Profile</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="post" action="fac_profile.php" name="f3" onSubmit="return fac_profile();">
+                <form role="form" method="post" action="fac_profile.php">
                   <div class="box-body">
                     <div class="form-group">
                       <label>First</label>
@@ -203,15 +202,15 @@ if(isset($_SESSION["login"])){
                     </div>
                     <div class="form-group">
                       <label>Subject 1</label>
-                      <input type="text" class="form-control" placeholder="<?php echo $sub11;?>" name="sub21"/>
+                      <input type="text" class="form-control" placeholder="<?php echo $sub1;?>" name="sub11"/>
                     </div>
                     <div class="form-group">
                       <label>Subject 2</label>
-                      <input type="text" class="form-control" placeholder="<?php echo $sub12;?>" name="sub22"/>
+                      <input type="text" class="form-control" placeholder="<?php echo $sub2;?>" name="sub12"/>
                     </div>
                     <div class="form-group">
                       <label>Subject 3</label>
-                      <input type="text" class="form-control" placeholder="<?php echo $sub13;?>" name="sub23"/>
+                      <input type="text" class="form-control" placeholder="<?php echo $sub3;?>" name="sub13"/>
                     </div>
                    </div><!-- /.box-body -->
 
@@ -249,18 +248,9 @@ if(isset($_SESSION["login"])){
 <?php
 }
 else{
-echo "You are not login. Please click <a href='index.html'>Log in</a> to login";
+echo "You are not login. Please click <a href='frontpage.html'>Log in</a> to login";
 exit;
 }
-$sub11=$_POST["sub21"];
-$sub12=$_POST["sub22"];
-$sub13=$_POST["sub23"];
-
-if(!empty($sub1)&&!empty($sub2)&&!empty($sub3)){
-$sql2="update faculty set sub1='{$sub11}',sub2='{$sub12}',sub3='{$sub13}' where first='{$first}';";
-$result2=mysqli_query($con,$sql2);
-}
-
 $first=$_POST["first"];
 $last=$_POST["last"];
 $pass=$_POST["pass"];
@@ -269,13 +259,23 @@ $address=$_POST["address"];
 $email=$_POST["email"];
 $phone=$_POST["phone"];
 $pass=$_POST["pass"];
+$sub1=$_POST["sub11"];
+$sub2=$_POST["sub12"];
+$sub3=$_POST["sub13"];
 
 if(!empty($first)&&!empty($last)&&!empty($address)&&!empty($email)&&!empty($phone)&&!empty($pass)){
 $sql1="update user set first='{$first}',last='{$last}',email='{$email}',address='{$address}',phone='{$phone}',pass='{$pass_hash}' where username='{$user}';";
 $result1=mysqli_query($con,$sql1);
 }
+else
+echo "Please fill all details";
 
-
+if(!empty($sub1)&&!empty($sub2)&&!empty($sub3)){
+$sql2="update faculty set sub1='{$sub1}',sub2='{$sub2}',sub3='{$sub3}' where first='{$first}';";
+$result2=mysqli_query($con,$sql2);
+}
+else
+echo "Please fill all details of subjects";
 //session_destroy();
 ?>
 </html>

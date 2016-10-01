@@ -1,12 +1,8 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
 include("connectphp.php");
 session_start();
 $us=$_SESSION["login"];
 $type=$_SESSION["type"];
-$result1=mysqli_query($con,"select onspot.subject from onspot,student_detail,question where student_detail.branch=question.branch and student_detail.sem=question.sem and student_detail.username='{$us}' and question.subject=onspot.subject and CURRENT_TIMESTAMP() between onspot.from_date and onspot.to_date;");
-$row=mysqli_fetch_assoc($result1);
-$subject=$row["subject"];
 if(isset($_SESSION["login"])){
 ?>
 
@@ -14,7 +10,7 @@ if(isset($_SESSION["login"])){
 <html>
   <head>
     <meta charset="UTF-8">
-    <title><?php echo $us; ?> | Dashboard</title>
+    <title>User | Dashboard</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
@@ -116,11 +112,6 @@ if(isset($_SESSION["login"])){
             </ul>
          </div>
         </nav>
-        <?php 
-		if(mysqli_num_rows($result1)>0){		
-		echo "<marquee><font color='#FFFFFF'><small class='label bg-red'> Alert !</small> Today is ".$subject." Quiz </font></marquee>";
-		}
-		?>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
@@ -168,23 +159,9 @@ if(isset($_SESSION["login"])){
             </li>
 			<li>
               <a href="profile.php">
-                <i class="fa fa-th"></i> <span>Edit Profile</span>
+                <i class="fa fa-th"></i> <span>Edit Profile</span></small>
               </a>
             </li>
-            <li>
-              <a href="view.php">
-                <i class="fa fa-th"></i> <span>View Result</span>
-              </a>
-            </li>
-            <?php 
-			if(mysqli_num_rows($result1)>0){
-			echo "<li><a href='main.php'><i class='fa fa-th'></i><span>Start ".$subject." Quiz</span><small class='label pull-right bg-red'> alert !</small><i class='fa fa-angle-left pull-right'></i></a></li>";		   
-			$_SESSION["s"]=$subject;
-			$_SESSION["q"]=0;
-			$_SESSION["tru"]=0;
-			$_SESSION["total"]=0;
-			}
-			?>
             <li>
               <a href="logout.php">
                 <i class="fa fa-th"></i> <span>Log out</span>
@@ -384,7 +361,7 @@ if(isset($_SESSION["login"])){
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2015-2016 <a href="https://plus.google.com/+JiteshGupta1995/about">+Jitesh</a>.</strong> All rights reserved. This website is best viewed in Google Chrome.
+        <strong>Copyright &copy; 2015-2016 <a href="https://plus.google.com/+JiteshGupta1995/about">Jitesh</a>.</strong> All rights reserved. This website is best viewed in Google Chrome.
       </footer>
     </div><!-- ./wrapper -->
 
@@ -434,10 +411,10 @@ if(isset($_SESSION["login"])){
 <?php
 }
 else{
-echo "You are not login. Please click <a href='index.html'>Log in</a> to login";
+echo "You are not login. Please click <a href='frontpage.html'>Log in</a> to login";
 exit;
 }
-/*$sql1="select email from user where username='{$us}';";
+$sql1="select email from user where username='{$us}';";
 $result1=mysqli_query($con,$sql1);
 $row=mysqli_fetch_row($result1);
 $email=$row["email"];

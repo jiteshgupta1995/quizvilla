@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
 include("connectphp.php");
 session_start();
 $us=$_SESSION["login"];
@@ -11,7 +10,7 @@ if(isset($_SESSION["login"])){
 <html>
   <head>
     <meta charset="UTF-8">
-    <title><?php echo $us; ?> | Dashboard</title>
+    <title>User | Dashboard</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
@@ -30,7 +29,7 @@ if(isset($_SESSION["login"])){
     <link href="plugins/morris/morris.css" rel="stylesheet" type="text/css" />
     <!-- jvectormap -->
     <link href="plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-    <!-- Date Picker --
+    <!-- Date Picker -->
     <link href="plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
     <!-- Daterange picker
     <link href="plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
@@ -380,14 +379,14 @@ if(isset($_SESSION["login"])){
     <script src="plugins/morris/morris.min.js" type="text/javascript"></script>
     <!-- Sparkline -->
     <script src="plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
-    <!-- jvectormap --
+    <!-- jvectormap -->
     <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
     <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
     <!-- jQuery Knob Chart -->
     <script src="plugins/knob/jquery.knob.js" type="text/javascript"></script>
-    <!-- daterangepicker --
+    <!-- daterangepicker -->
     <script src="plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-    <!-- datepicker --
+    <!-- datepicker -->
     <script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
     <!-- Bootstrap WYSIHTML5 -->
     <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
@@ -402,17 +401,16 @@ if(isset($_SESSION["login"])){
 
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="dist/js/pages/dashboard.js" type="text/javascript"></script>
-    <!-- ChartJS 1.0.1 -->
-    <script src="plugins/chartjs/Chart.min.js" type="text/javascript"></script>
 
     <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js" type="text/javascript"></script>   
+    <script src="dist/js/demo.js" type="text/javascript"></script>
+ 
  </body>
 </html>
 <?php
 }
 else{
-echo "You are not login. Please click <a href='index.html'>Log in</a> to login";
+echo "You are not login. Please click <a href='landing_page.html'>Log in</a> to login";
 exit;
 }
 /*session_destroy();

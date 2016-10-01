@@ -1,25 +1,9 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
 include("connectphp.php");
 session_start();
 $user=$_SESSION["login"];
 $type=$_SESSION["type"];
 
-$sql2="select sub1,sub2,sub3 from faculty where username='{$user}';";
-$result2=mysqli_query($con,$sql2);
-$row=mysqli_fetch_assoc($result2);
-$sub1=$row["sub1"];
-$sub2=$row["sub2"];
-$sub3=$row["sub3"];
-
-if($_SESSION["c"]!=0){
-$subject=$_POST["subject"];
-
-if(!empty($subject)){  
-$sql="select * from result where subject='{$subject}';";
-$result=mysqli_query($con,$sql);
-}
-}
 if(isset($_SESSION["login"])){
 ?>
 
@@ -27,7 +11,7 @@ if(isset($_SESSION["login"])){
 <html>
   <head>
     <meta charset="UTF-8">
-    <title><?php echo $user; ?> | quiz</title>
+    <title>user | quiz</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -62,7 +46,7 @@ if(isset($_SESSION["login"])){
     <div class="wrapper">
       
       <header class="main-header">
-        <a href="facultyphp.php" class="logo"><b>Welcome!</b> Faculty</a>
+        <a href="testmysql.php" class="logo">Welcome</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
@@ -93,7 +77,7 @@ if(isset($_SESSION["login"])){
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="fac_profile.php" class="btn btn-default btn-flat">Profile</a>
+                      <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
                       <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -142,69 +126,73 @@ if(isset($_SESSION["login"])){
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>View Performance</h1>
+          <h1>Build Quiz</h1>
           <ol class="breadcrumb">
             <li><a href="facultyphp.php"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">View Performance</a></li>
+            <li><a href="#">Build Quiz</a></li>
           </ol>
         </section>
 
         <!-- Main content -->
         <!-- Main content -->
         <section class="content">
-        <form method="post" action="modify2.php">
+        <form method="post" action="create.php">
           <div class="row">
-            <div class="col-xs-12"><!-- /.box -->
+            <div class="col-md-6"><!-- /.box -->
               <!-- iCheck -->
-              <div class="box box-info">
-				<table id="example1" class="table table-bordered table-striped"> 
-              <tr>
-              <td>
-              <div class="form-group">
-              <label>Select Subject:</label>
-              <div class="input-group">
-              <select name="subject" class="form-control">
-              <option></option>
-              <option><?php echo $sub1; ?></option>
-              <option><?php echo $sub2; ?></option>
-              <option><?php echo $sub3; ?></option>
-              </select>
-              </div>
-              </div>
-              </td>
-              <td>
-              <div class="form-group">
-              <label></label>
-              <div class="input-group">
-              <input type="submit" class="btn bg-green" value="Find"/>
-              </div>
-              </div>
-              </td>
-              </tr>
-              <tr>
-              <td>Subject</td>
-              <td>First</td>
-              <td>Score Obtained</td>
-              <td>Total Score</td>
-              <td>Date</td>
-              </tr>
-              <tr>
-			<?php 
-			if($_SESSION["c"]!=0){
-			while($row=mysqli_fetch_assoc($result)){ ?>
-				<tr>
-                <td><?php echo $row["subject"]; ?></td>
-                <td><?php echo $row["first"]; ?></td>
-                <td><?php echo $row["usr_ans"]; ?></td>
-                <td><?php echo $row["true_ans"]; ?></td>
-				<td><?php echo $row["day"]; ?></td>
-                </tr>
-				<?php }} ?>
-              </table>
+              <div class="box box-danger">
+                 <h3 class="box-title">
+                  Question <textarea class="form-control" name="ques" placeholder="Enter Question" rows="5"></textarea></h3>
                 </div>
                </div>
               </div> 
-    
+          <div class="row">
+            <div class="col-md-6"><!-- /.box -->
+              <!-- iCheck -->
+              <div class="box box-success">
+                <div class="box-body">
+                  <!-- radio -->
+                  <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                    <input type="radio" name="r3" class="flat-red" disabled/>
+                    </span>
+                    <input type="text" class="form-control" name="ans1" placeholder="Option 1"/>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <input type="radio" name="r3" class="flat-red" disabled/>
+                    </span>
+                    <input type="text" class="form-control" name="ans2" placeholder="Option 2"/>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <input type="radio" name="r3" class="flat-red" disabled/>
+                    </span>
+                    <input type="text" class="form-control" name="ans3" placeholder="Option 3"/>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <input type="radio" name="r3" class="flat-red" disabled/>
+                    </span>
+                    <input type="text" class="form-control" name="ans4" placeholder="Option 4"/>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <input type="radio" name="r3" class="flat-red" disabled/>
+                    </span>
+                    <input type="text" class="form-control" name="true_ans" placeholder="True answer"/>
+                    </div>
+                  </div>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+       		</div><!-- /.box-body -->
+           </div><!-- btn-warning/.box -->
+	<input type="submit" class="btn bg-green" value="Submit"/>    
     </form>      
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
@@ -264,12 +252,27 @@ if(isset($_SESSION["login"])){
 <?php
 }
 else{
-echo "You are not login. Please click <a href='index.html'>Log in</a> to login";
+echo "You are not login. Please click <a href='frontpage.html'>Log in</a> to login";
 exit;
 }
-
-$_SESSION["c"]=1;
-
+$ques1=$_POST["ques"];
+$ans1=$_POST["ans1"];
+$ans2=$_POST["ans2"];
+$ans3=$_POST["ans3"];
+$ans4=$_POST["ans4"];
+$sem=$_POST["sem"];
+$branch=$_POST["branch"];
+$subject=$_POST["subject"];
+$true_ans=$_POST["true_ans"];
+if(!empty($branch)&&!empty($sem)&&!empty($subject)&&!empty($ques1)&&!empty($ans1)&&!empty($ans2)&&!empty($ans3)&&!empty($ans4)&&!empty($true_ans)){  
+$sql="insert into question(branch,sem,subject,ques,ans1,ans2,ans3,ans4,true_ans) values('{$branch}','{$sem}','{$subject}','{$ques1}','{$ans1}','{$ans2}','{$ans3}','{$ans4}','{$true_ans}') ;";
+$result=mysqli_query($con,$sql);
+exit;
+}
+else{
+echo "Please Fill all details";
+exit;
+}
 /*session_destroy();
 mysqli_close($con);*/
 ?>

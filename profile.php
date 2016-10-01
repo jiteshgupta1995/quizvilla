@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <?php
-error_reporting(E_ERROR | E_PARSE);
 include("connectphp.php");
 session_start();
 $user=$_SESSION["login"];
@@ -37,11 +36,11 @@ if(isset($_SESSION["login"])){
     <!-- Ionicons -->
     <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
-    <link href="/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
     <link href="dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-<script type="application/javascript" src="javascriptfile.js"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -134,8 +133,8 @@ if(isset($_SESSION["login"])){
          <!-- sidebar menu: : style can be found in sidebar.less -->
          <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview">
-              <a href="studentphp.php">
+            <li class="active treeview">
+              <a href="landing_page.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span><!-- <i class="fa fa-angle-left pull-right"></i>-->
               </a>
 <!--              <ul class="treeview-menu">
@@ -149,14 +148,9 @@ if(isset($_SESSION["login"])){
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
             </li>
-			<li class="active">
+			<li>
               <a href="#">
-                <i class="fa fa-th"></i> <span>Edit Profile</span>
-              </a>
-            </li>
-            <li>
-              <a href="view.php">
-                <i class="fa fa-th"></i> <span>View Result</span>
+                <i class="fa fa-th"></i> <span>Edit Profile</span></small>
               </a>
             </li>
             <li>
@@ -195,7 +189,7 @@ if(isset($_SESSION["login"])){
                   <h3 class="box-title">Profile</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="post" action="profile.php" onSubmit="return profile();" name="f2">
+                <form role="form" method="post" action="profile.php">
                   <div class="box-body">
                     <div class="form-group">
                       <label>First</label>
@@ -265,7 +259,7 @@ if(isset($_SESSION["login"])){
 <?php
 }
 else{
-echo "You are not login. Please click <a href='index.html'>Log in</a> to login";
+echo "You are not login. Please click <a href='landing_page.html'>Log in</a> to login";
 exit;
 }
 $first=$_POST["first"];
@@ -283,11 +277,14 @@ if(!empty($first)&&!empty($last)&&!empty($address)&&!empty($email)&&!empty($phon
 $sql1="update user set first='{$first}',last='{$last}',email='{$email}',address='{$address}',phone='{$phone}',pass='{$pass_hash}' where username='{$user}';";
 $result1=mysqli_query($con,$sql1);
 }
-
+else
+echo "Please Provide all details";
 if(!empty($branch)&&!empty($sem)){
 $upd="update student_detail set branch='{$branch}',sem='{$sem}' where username='{$user}';";
 $upd_result=mysqli_query($con,$upd);
 }
+else
+echo "Please Provide all details";
 //session_destroy();
 ?>
 </html>

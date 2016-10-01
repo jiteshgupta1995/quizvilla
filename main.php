@@ -1,13 +1,8 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
 include("connectphp.php");
 session_start();
 $user=$_SESSION["login"];
 $type=$_SESSION["type"];
-$rs=mysqli_query($con,"select first from user where username='{$user}';");
-$row=mysqli_fetch_assoc($rs);
-$first=$row["first"];
-$a=0;
 /*$sub="select sub1,sub2,sub3,sub4,sub5,sub6 from student_info,user,student_detail where user.username=student_detail.username and student_detail.branch=student_info.branch and student_detail.sem=student_info.sem and user.username='{$user}';";
 	$sub_result=mysqli_query($con,$sub);
 
@@ -19,9 +14,7 @@ $sub4="aff";
 $sub5="sports";
 $sub6="iq";
 //}
-if($_SESSION["q"]==0){	
-	global $result;
-	global $value;
+	
 if($_GET['subj']=='1')
 	$value=$sub1;
 else if($_GET['subj']=='2')
@@ -34,99 +27,16 @@ else if($_GET['subj']=='5')
 	 $value=$sub5;
 else if($_GET['subj']=='6')
 	$value=$sub6;
-else if(!empty($_SESSION["s"]))
-	$value=$_SESSION["s"];
-
-mysqli_query($con,"delete from current;");
-$_SESSION["val"]=$value;
-$sql="select ques,ans1,ans2,ans3,ans4,true_ans from question,student_detail where student_detail.username='{$user}' and question.subject='{$value}';";
-$result=mysqli_query($con,$sql);
-$b=mysqli_num_rows($result);
-
-while($a<$b){
-//echo $a." of current <br/>";
-//echo $b." of question <br/>";
-$row=mysqli_fetch_assoc($result);
-$_SESSION["ques1"]=$row["ques"];
-$ans1=$row["ans1"];
-$ans2=$row["ans2"];
-$ans3=$row["ans3"];
-$ans4=$row["ans4"];
-$true_ans=$row["true_ans"];
-$sql1="insert into current(username,subject,ques,ans1,ans2,ans3,ans4,true_ans,usr_ans)values('{$user}','{$value}','{$_SESSION['ques1']}','{$ans1}','{$ans2}','{$ans3}','{$ans4}','{$true_ans}',NULL);";
-$result1=mysqli_query($con,$sql1);
-$a=$a+1;
-}
-//$q=0;
-	$sql2="select ques,ans1,ans2,ans3,ans4,true_ans from current where subject='{$_SESSION['val']}' and username='{$user}';";
-	$result2=mysqli_query($con,$sql2);
-	$row= mysqli_fetch_assoc($result2);	
-	$_SESSION["ques1"]=$row["ques"];
-	$ans1=$row["ans1"];
-	$ans2=$row["ans2"];
-	$ans3=$row["ans3"];
-	$ans4=$row["ans4"];
-	$_SESSION["true_ans"]=$row["true_ans"];
-	$_SESSION["q"]=$_SESSION["q"]+1;		
-
-/*	$r1=$_POST["r1"];
-	if($r1==$true_ans){
-//	mysqli_query("insert into result(test_id,usr_ans,true_ans,day,first)values('{$test_id}','{$r1}','{$true_ans}',".date("d/m/Y").",'{$first}');");
-	$_SESSION["tru"]=1;
-	$_SESSION["total"]=1;
-	}
-	else{
-	$_SESSION["total"]=1;
-	$_SESSION["tru"]=0;
-	}
-*/
-}
-else
-{	$r1=$_POST["r1"];
-	if($r1==$_SESSION["true_ans"]){
-//	mysqli_query("insert into result(test_id,usr_ans,true_ans,day,first)values('{$test_id}','{$r1}','{$true_ans}',".date("d/m/Y").",'{$first}');");
-	$_SESSION["tru"]=$_SESSION["tru"]+1;
-	$_SESSION["total"]=$_SESSION["total"]+1;
-	}
-	else
-	$_SESSION["total"]=$_SESSION["total"]+1;
-	mysqli_query($con,"update current set usr_ans='{$r1}' where username='$user' and ques='{$_SESSION['ques1']}';");
-	$sql2="select ques,ans1,ans2,ans3,ans4,true_ans from current where subject='{$_SESSION['val']}' and username='{$user}';";
-	$result2=mysqli_query($con,$sql2);
-	mysqli_data_seek($result2,$_SESSION["q"]);
-	if($_SESSION["q"]<mysqli_num_rows($result2)){
-	$row= mysqli_fetch_assoc($result2);	
-	$_SESSION["ques1"]=$row["ques"];
-	$ans1=$row["ans1"];
-	$ans2=$row["ans2"];
-	$ans3=$row["ans3"];
-	$ans4=$row["ans4"];
-	$_SESSION["true_ans"]=$row["true_ans"];
-	$_SESSION["q"]=$_SESSION["q"]+1;
-			
-	}
-	else{
-//echo $_SESSION["tru"];
-//echo $_SESSION["total"];
-
-	mysqli_query($con,"insert into result(username,subject,usr_ans,true_ans,day,first)values('{$user}','{$_SESSION['val']}',{$_SESSION['tru']},{$_SESSION['total']},CURRENT_TIMESTAMP(),'{$first}');");	
-	echo "Thank you for participating.<br/>";
-	echo "Please proceed to this <a href='current.php'>link </a>to View your Results.";
-	exit;
-	}
-}
-/*function next_ques(){
-	echo "chal gaya";
+	
 $sql="select ques,ans1,ans2,ans3,ans4 from user,question,student_detail where student_detail.username='{$user}' and student_detail.branch=question.branch and student_detail.sem=question.sem and question.subject='{$value}';";
 $result=mysqli_query($con,$sql);
-while($row=mysqli_fetch_assoc($result)){
+$row=mysqli_fetch_assoc($result);
 $ques1=$row["ques"];
 $ans1=$row["ans1"];
 $ans2=$row["ans2"];
 $ans3=$row["ans3"];
 $ans4=$row["ans4"];
-}
-}*/
+
 if(isset($_SESSION["login"])){
 ?>
 
@@ -250,20 +160,7 @@ if(isset($_SESSION["login"])){
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1><?php 
-	if($_SESSION["val"]=='gk')
-	echo "G.K questions";
-else if($_SESSION["val"]=='lit')
-	echo "Literature questions";
-else if($_SESSION["val"]=='env')
-	echo "Environmental questions";
-else if($_SESSION["val"]=='sports')
-	echo "Sports questions";
-else if($_SESSION["val"]=='aff')
-	 echo "Current affairs questions";
-else if($_SESSION["val"]=='iq')
-	 echo "I.Q questions";
-else echo $_SESSION["val"];	 
-	  ?></h1>
+		  echo $value; ?></h1>
           <ol class="breadcrumb">
             <li><a href="studentphp.php"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Quiz</a></li>
@@ -274,17 +171,15 @@ else echo $_SESSION["val"];
         <!-- Main content -->
         <section class="content">
           <div class="row">
-            <div class="col-xs-8"><!-- /.box -->
+            <div class="col-md-6"><!-- /.box -->
               <!-- iCheck -->
               <div class="box box-danger">
-                 <h3 class="box-title">  Q <?php echo $_SESSION["q"];?>.<textarea class="form-control" rows="3" placeholder=" 
-				 <?php  echo $_SESSION["ques1"]; ?>" disabled ></textarea> </h3>
+                 <h3 class="box-title">  Q. <?php echo $ques1; ?> </h3>
                 </div>
                </div>
               </div> 
-          <form method="post" action="main.php">
           <div class="row">
-            <div class="col-xs-8"><!-- /.box -->
+            <div class="col-md-6"><!-- /.box -->
               <!-- iCheck -->
               <div class="box box-success">
                 <div class="box-body">
@@ -292,28 +187,28 @@ else echo $_SESSION["val"];
                   <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon">
-                    <input type="radio" name="r1" class="flat-red" value="a"/>
+                    <input type="radio" name="r3" class="flat-red"/>
                     </span>
                     <input type="text" class="form-control" value="<?php echo $ans1; ?>" disabled/>
                     </div>
                     <br/>
                     <div class="input-group">
                     <span class="input-group-addon">
-                    <input type="radio" name="r1" class="flat-red" value="b"/>
+                    <input type="radio" name="r3" class="flat-red"/>
                     </span>
                     <input type="text" class="form-control" value="<?php echo $ans2; ?>" disabled/>
                     </div>
                     <br/>
                     <div class="input-group">
                     <span class="input-group-addon">
-                    <input type="radio" name="r1" class="flat-red" value="c"/>
+                    <input type="radio" name="r3" class="flat-red"/>
                     </span>
                     <input type="text" class="form-control" value="<?php echo $ans3; ?>" disabled/>
                     </div>
                     <br/>
                     <div class="input-group">
                     <span class="input-group-addon">
-                    <input type="radio" name="r1" class="flat-red" value="d"/>
+                    <input type="radio" name="r3" class="flat-red"/>
                     </span>
                     <input type="text" class="form-control" value="<?php echo $ans4; ?>" disabled/>
                     </div>
@@ -322,10 +217,10 @@ else echo $_SESSION["val"];
               </div><!-- /.box -->
        		</div><!-- /.box-body -->
            </div><!-- btn-warning/.box -->
-<input type="submit" value="Next" class="btn bg-green" /><!--<a href="main.php">--Submit</a><span class="fa fa-caret-down"></span></button>-->
-<button type="button" class="btn bg-yellow" disabled>Save<span class="fa fa-caret-down"></span></button>
-<button type="button" class="btn bg-red" disabled>Submit<span class="fa fa-caret-down"></span></button>
-          </form>          
+<button type="button" class="btn bg-green" ><!--<a href="main.php">-->Submit</a><span class="fa fa-caret-down"></span></button>
+<button type="button" class="btn bg-yellow">Save<span class="fa fa-caret-down"></span></button>
+<button type="button" class="btn bg-red">Skip<span class="fa fa-caret-down"></span></button>
+          
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
@@ -384,7 +279,7 @@ else echo $_SESSION["val"];
 <?php
 }
 else{
-echo "You are not login. Please click <a href='index.html'>Log in</a> to login";
+echo "You are not login. Please click <a href='landing_page.html'>Log in</a> to login";
 exit;
 }
 /*session_destroy();
